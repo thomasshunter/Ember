@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:security="http://www.springframework.org/schema/security"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	       		           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   		               http://www.springframework.org/schema/context
+	   		               http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			               http://www.springframework.org/schema/mvc 
+			               http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+			               http://www.springframework.org/schema/security
+			               http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	
+    <context:property-placeholder location="file:///etc/ember/ember.properties" />
+	
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+	
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package-->
+	<context:component-scan base-package="org.ihie" />  
+	
+	
+	<!-- Configures the annotation-driven Spring MVC Controller programming model.
+	Note that, with Spring 3.0, this tag works in Servlet MVC only!  -->
+	<mvc:annotation-driven /> 
+	
+    
+
+    <!-- Oracle:START -->             
+    <bean id="dataSourceOracle" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName"><value>${db.driver.oracle}</value></property>
+        <property name="url"><value>${db.oracle.url}</value></property>
+        <property name="username"><value>${db.oracle.user}</value></property>
+        <property name="password"><value>${db.oracle.password}</value></property>
+        <property name="poolPreparedStatements"><value>true</value></property>
+        <property name="maxActive"><value>10</value></property>
+        <property name="maxIdle"><value>10</value></property>
+    </bean>    
+    <!-- Oracle:END -->
+                     
+    <bean id="oracle" class="org.ihie.exceptionsbrowser.database.oracle.OracleUtil">
+        <property name="dataSourceOracle"               ref="dataSourceOracle" />
+    </bean>
+        
+</beans>
