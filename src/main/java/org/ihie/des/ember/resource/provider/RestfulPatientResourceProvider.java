@@ -3,9 +3,13 @@ package org.ihie.des.ember.resource.provider;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.ihie.des.ember.services.patient.service.PatientServiceService;
+import org.springframework.context.annotation.Bean;
+
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.dstu2.valueset.IdentifierUseEnum;
 import ca.uhn.fhir.model.primitive.IdDt;
 import ca.uhn.fhir.model.primitive.UriDt;
 import ca.uhn.fhir.rest.annotation.IdParam;
@@ -18,6 +22,7 @@ import ca.uhn.fhir.rest.server.IResourceProvider;
 /**
  * All resource providers must implement IResourceProvider
  */
+@Resource(name="restfulPatientResourceProvider")
 public class RestfulPatientResourceProvider implements IResourceProvider
 {
     /**
@@ -72,9 +77,13 @@ public class RestfulPatientResourceProvider implements IResourceProvider
      *         multiple matching resources, or it may also be empty.
      */
     @Search()
-    public List<Patient> getPatient(@RequiredParam(name = Patient.SP_FAMILY) StringParam theFamilyName)
+    public List<Patient> getPatientByFamilyAndGivenNames( @RequiredParam(name = Patient.SP_FAMILY) StringParam familyNameParm, @RequiredParam(name = Patient.SP_GIVEN) StringParam givenNameParm )
     {
-        Patient patient = new Patient();
+        StringParam medicalRecordNumberParm     = null;
+        StringParam socialSecurityNumberParm    = null;
+        Patient patient                         = this.getPatientServiceService().getPatientQuery( givenNameParm, familyNameParm, medicalRecordNumberParm, socialSecurityNumberParm );
+
+        /*
         patient.addIdentifier();
         patient.getIdentifier().get(0).setUse(IdentifierUseEnum.OFFICIAL);
         patient.getIdentifier().get(0).setSystem(new UriDt("urn:hapitest:mrns"));
@@ -83,7 +92,17 @@ public class RestfulPatientResourceProvider implements IResourceProvider
         patient.getName().get(0).addFamily(theFamilyName.getValue());
         patient.getName().get(0).addGiven("PatientOne");
         patient.setGender(AdministrativeGenderEnum.MALE);
+        */
+        
         return Collections.singletonList(patient);
+    }
+    
+    @Bean()
+    public PatientServiceService getPatientServiceService()
+    {
+        PatientServiceService patService = new PatientServiceService();
+        
+        return patService;
     }
 
 }
