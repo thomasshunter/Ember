@@ -5,13 +5,13 @@
 
   <servlet>
     <description>JAX-RS Tools Generated - Do not modify</description>
-    <servlet-name>EmberRequestServlet</servlet-name>
-    <servlet-class>emberRequestServlet</servlet-class>
+    <servlet-name>EmberRestfulServlet</servlet-name>
+    <servlet-class>org.ihie.des.ember.server.EmberRestfulServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>EmberRequestServlet</servlet-name>
+    <servlet-name>EmberRestfulServlet</servlet-name>
     <url-pattern>/jaxrs/*</url-pattern>
   </servlet-mapping>
 
