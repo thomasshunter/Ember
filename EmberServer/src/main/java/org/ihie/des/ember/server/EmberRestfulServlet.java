@@ -19,7 +19,7 @@ public class EmberRestfulServlet extends RestfulServer
 {    
     public EmberRestfulServlet()
     {
-        String serverBaseUrl = "http://localhost:8080/Ember";
+        String serverBaseUrl = "http://localhost:8080/EmberServer";
         setServerAddressStrategy(new HardcodedServerAddressStrategy(serverBaseUrl));
     }
     
@@ -37,7 +37,7 @@ public class EmberRestfulServlet extends RestfulServer
          */
         List<IResourceProvider> resourceProviders = new ArrayList<IResourceProvider>();
         resourceProviders.add( new PatientResourceProvider() );
-        resourceProviders.add(new ObservationResourceProvider());
+        resourceProviders.add( new ObservationResourceProvider() );
         
         setResourceProviders(resourceProviders);
     }

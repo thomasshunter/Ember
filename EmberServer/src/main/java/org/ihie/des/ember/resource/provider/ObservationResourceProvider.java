@@ -3,9 +3,10 @@ package org.ihie.des.ember.resource.provider;
 import java.util.Collections;
 import java.util.List;
 
-import ca.uhn.fhir.model.dstu2.valueset.IdentifierUseEnum;
+import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.valueset.IdentifierUseEnum;
 import ca.uhn.fhir.model.primitive.IdDt;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.model.primitive.UriDt;
@@ -22,9 +23,9 @@ public class ObservationResourceProvider implements IResourceProvider
      * overridden to indicate what type of resource this provider supplies.
      */
     @Override
-    public Class<Patient> getResourceType()
+    public Class<Observation> getResourceType()
     {
-        return Patient.class;
+        return Observation.class;
     }
 
     /**
@@ -39,16 +40,18 @@ public class ObservationResourceProvider implements IResourceProvider
      *         exists.
      */
     @Read()
-    public Patient getResourceById(@IdParam IdDt theId)
+    public Observation getResourceById(@IdParam IdDt theId)
     {
-        Patient patient = new Patient();
-        patient.addIdentifier();
-        patient.getIdentifier().get(0).setSystem(new UriDt("urn:hapitest:mrns"));
-        patient.getIdentifier().get(0).setValue("00002");
-        patient.addName().addFamily("Test");
-        patient.getName().get(0).addGiven("PatientOne");
-        patient.setGender(AdministrativeGenderEnum.FEMALE);
-        return patient;
+        Observation observation = new Observation();
+        
+        observation.addIdentifier();
+        observation.getIdentifier().get(0).setSystem(new UriDt("urn:hapitest:mrns"));
+        observation.getIdentifier().get(0).setValue("00002");
+        //patient.addName().addFamily("Test");
+        //patient.getName().get(0).addGiven("PatientOne");
+        //patient.setGender(AdministrativeGenderEnum.FEMALE);
+        
+        return observation;
     }
 
     /**
@@ -68,18 +71,19 @@ public class ObservationResourceProvider implements IResourceProvider
      *         multiple matching resources, or it may also be empty.
      */
     @Search()
-    public List<Patient> getPatient(@RequiredParam(name = Patient.SP_FAMILY) StringDt theFamilyName)
+    public List<Observation> getObservation(@RequiredParam(name = Patient.SP_FAMILY) StringDt theFamilyName)
     {
-        Patient patient = new Patient();
-        patient.addIdentifier();
-        patient.getIdentifier().get(0).setUse(IdentifierUseEnum.OFFICIAL);
-        patient.getIdentifier().get(0).setSystem(new UriDt("urn:hapitest:mrns"));
-        patient.getIdentifier().get(0).setValue("00001");
-        patient.addName();
-        patient.getName().get(0).addFamily("Test");
-        patient.getName().get(0).addGiven("PatientOne");
-        patient.setGender(AdministrativeGenderEnum.MALE);
-        return Collections.singletonList(patient);
+        Observation observation = new Observation();
+        observation.addIdentifier();
+        observation.getIdentifier().get(0).setUse(IdentifierUseEnum.OFFICIAL);
+        observation.getIdentifier().get(0).setSystem(new UriDt("urn:hapitest:mrns"));
+        observation.getIdentifier().get(0).setValue("00001");
+        //patient.addName();
+        //patient.getName().get(0).addFamily("Test");
+        //patient.getName().get(0).addGiven("PatientOne");
+        //patient.setGender(AdministrativeGenderEnum.MALE);
+        
+        return Collections.singletonList( observation );
     }
 
 }

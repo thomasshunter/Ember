@@ -1,5 +1,6 @@
 package org.ihie.des.ember.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -19,6 +20,8 @@ import ca.uhn.fhir.to.TesterConfig;
 @Import(FhirTesterMvcConfig.class)
 public class EmberFhirTesterConfig
 {
+    @Value("${serverBase}" )
+    private String serverBase;
 
     /**
      * This bean tells the testing webpage which servers it should configure
@@ -42,7 +45,7 @@ public class EmberFhirTesterConfig
         retVal.addServer()
                 .withId("home")
                 .withFhirVersion(FhirVersionEnum.DSTU2)
-                .withBaseUrl("${serverBase}/fhir")
+                .withBaseUrl( this.serverBase + "/fhir" )
                 .withName("Local Tester")
               .addServer()
                   .withId("hapi")
