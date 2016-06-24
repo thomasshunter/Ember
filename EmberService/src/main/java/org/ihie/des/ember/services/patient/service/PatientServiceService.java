@@ -15,7 +15,7 @@ public class PatientServiceService
 
     private PatientServiceDAO patientServiceDAO;
     
-    public ca.uhn.fhir.model.dstu2.resource.Patient getPatientQuery( StringParam givenNameParm, StringParam familyNameParm, StringParam medicalRecordNumberParm, StringParam socialSecurityNumberParm )
+    public ca.uhn.fhir.model.dstu2.resource.Patient getPatientService( StringParam givenNameParm, StringParam familyNameParm, StringParam medicalRecordNumberParm, StringParam socialSecurityNumberParm )
     {
         boolean validInputs = false;
         
@@ -40,7 +40,7 @@ public class PatientServiceService
         }
         else
         {
-            PatientServiceService.LOG.error( "PatientServiceService.getPatientQuery() encountered no valid combination of inputs:" 
+            PatientServiceService.LOG.error( "PatientServiceService.getPatientService() encountered no valid combination of inputs:" 
                                                 + "\n\t givenNameParm=" 
                                                 + givenNameParm 
                                                 + "\n\t familyNameParm=" 
@@ -73,7 +73,7 @@ public class PatientServiceService
         StringParam patientId                = new StringParam("34001925");
         StringParam socialSecurityNumberParm = new StringParam();
         
-        Patient pat                 = pats.getPatientQuery( givenNameParm, familyNameParm, medicalRecordNumberParm, socialSecurityNumberParm );
+        Patient pat                 = pats.getPatientService( givenNameParm, familyNameParm, medicalRecordNumberParm, socialSecurityNumberParm );
         
         System.out.println( "pat=" + pat );
     }

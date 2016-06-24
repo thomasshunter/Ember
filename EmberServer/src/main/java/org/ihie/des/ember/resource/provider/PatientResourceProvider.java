@@ -85,7 +85,7 @@ public class PatientResourceProvider implements IResourceProvider
     {
         StringParam medicalRecordNumberParm     = null;
         StringParam socialSecurityNumberParm    = null;
-        Patient patient                         = this.getPatientServiceService().getPatientQuery( givenNameParm, familyNameParm, medicalRecordNumberParm, socialSecurityNumberParm );
+        Patient patient                         = this.getPatientServiceService().getPatientService( givenNameParm, familyNameParm, medicalRecordNumberParm, socialSecurityNumberParm );
 
         /*
         patient.addIdentifier();
