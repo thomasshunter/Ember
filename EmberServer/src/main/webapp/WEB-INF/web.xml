@@ -25,7 +25,6 @@
 
 	<!-- 
 	This is the actual FHIR server
-	-->
 	<servlet>
 		<servlet-name>fhirServlet</servlet-name>
 		<servlet-class>org.ihie.des.ember.server.EmberRestfulServlet</servlet-class>
@@ -35,6 +34,7 @@
 		<servlet-name>fhirServlet</servlet-name>
 		<url-pattern>/fhir/*</url-pattern>
 	</servlet-mapping>
+    -->
 
 	<!-- 
 	This filters provide support for Cross Origin Resource Sharing (CORS). You 

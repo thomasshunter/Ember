@@ -6,13 +6,17 @@
    <parent>
       <groupId>ca.uhn.hapi.fhir</groupId>
       <artifactId>hapi-fhir</artifactId>
-      <version>1.6-SNAPSHOT</version>
+      <version>1.6</version>
       <relativePath>../pom.xml</relativePath>
    </parent>
 
+   <properties>
+      <hapi-version>1.6</hapi-version>
+   </properties>
+
    <groupId>org.ihie.des.ember.server</groupId>
    <artifactId>EmberServer</artifactId>
-   <version>0.0.1</version>
+   <version>0.0.2</version>
    <packaging>war</packaging>
    <name>EmberServer</name>
 
@@ -31,34 +35,40 @@
       <dependency>
          <groupId>org.ihie.des.ember.service</groupId>
          <artifactId>EmberService</artifactId>
-         <version>0.0.1</version>
+         <version>0.0.3</version>
+      </dependency>
+
+      <dependency>
+         <groupId>ca.uhn.hapi.fhir</groupId>
+         <artifactId>hapi-fhir-validation-resources-dstu2</artifactId>
+         <version>${hapi-version}</version>
       </dependency>
 
       <!-- This dependency includes the core HAPI-FHIR classes -->
       <dependency>
          <groupId>ca.uhn.hapi.fhir</groupId>
          <artifactId>hapi-fhir-base</artifactId>
-         <version>1.6-SNAPSHOT</version>
+         <version>${hapi-version}</version>
       </dependency>
       <!-- At least one "structures" JAR must also be included -->
       <dependency>
          <groupId>ca.uhn.hapi.fhir</groupId>
          <artifactId>hapi-fhir-structures-dstu2</artifactId>
-         <version>1.6-SNAPSHOT</version>
+         <version>${hapi-version}</version>
       </dependency>
 
       <!-- This dependency is used for the "FHIR Tester" web app overlay -->
       <dependency>
          <groupId>ca.uhn.hapi.fhir</groupId>
          <artifactId>hapi-fhir-testpage-overlay</artifactId>
-         <version>1.6-SNAPSHOT</version>
+         <version>${hapi-version}</version>
          <type>war</type>
          <scope>provided</scope>
       </dependency>
       <dependency>
          <groupId>ca.uhn.hapi.fhir</groupId>
          <artifactId>hapi-fhir-testpage-overlay</artifactId>
-         <version>1.6-SNAPSHOT</version>
+         <version>${hapi-version}</version>
          <classifier>classes</classifier>
          <scope>provided</scope>
       </dependency>
